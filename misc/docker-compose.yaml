@@ -1,0 +1,102 @@
+services:
+  archisteamfarm:
+    image: justarchi/archisteamfarm:latest
+    container_name: asf
+    ports:
+      - "1242:1242"
+    volumes:
+      - ./config/ASF/config:/app/config
+      - ./config/ASF/plugins:/app/plugins
+    restart: unless-stopped
+    user: 1000:1000
+    labels:
+      tsdproxy.enable: "true"
+
+  freshrss:
+    image: lscr.io/linuxserver/freshrss:latest
+    container_name: freshrss
+    env_file:
+      - ../.env
+    volumes:
+      - ./config/freshrss:/config
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    labels:
+      tsdproxy.enable: "true"
+      tsdproxy.container_port: "80"
+
+  radicale:
+    container_name: radicale
+    image: tomsquest/docker-radicale
+    ports:
+      - 5232:5232
+    init: true
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETUID
+      - SETGID
+      - CHOWN
+      - KILL
+    healthcheck:
+      test: curl -f http://127.0.0.1:5232 || exit 1
+      interval: 30s
+      retries: 3
+    restart: unless-stopped
+    volumes:
+      - ./config/radicale/config:/config:ro
+      - ./config/radicale/data:/data
+    labels:
+      tsdproxy.enable: "true"
+
+  syncthing:
+    container_name: syncthing
+    image: lscr.io/linuxserver/syncthing:latest
+    env_file:
+      - ../.env
+    volumes:
+      - ./config/syncthing:/config
+      - ${DRIVE_DIRECTORY}/files:/data1
+    ports:
+      - 8384:8384
+      - 22000:22000/tcp
+      - 22000:22000/udp
+      - 21027:21027/udp
+    restart: unless-stopped
+    labels:
+      tsdproxy.enable: "true"
+      tsdproxy.container_port: 8384
+
+  copyparty:
+    image: copyparty/ac:latest
+    container_name: copyparty
+    user: "1000:1000"
+    ports:
+      - 3923:3923
+    volumes:
+      - ./config/copyparty:/cfg:z
+      - ${DRIVE_DIRECTORY}/files:/w:z
+    environment:
+      LD_PRELOAD: /usr/lib/libmimalloc-secure.so.NOPE
+      # enable mimalloc by replacing "NOPE" with "2" for a nice speed-boost (will use twice as much ram)
+
+      PYTHONUNBUFFERED: 1
+      # ensures log-messages are not delayed (but can reduce speed a tiny bit)
+
+    stop_grace_period: 15s  # thumbnailer is allowed to continue finishing up for 10s after the shutdown signal
+    healthcheck:
+      # hide it from logs with "/._" so it matches the default --lf-url filter
+      test: ["CMD-SHELL", "wget --spider -q 127.0.0.1:3923/?reset=/._"]
+      interval: 1m
+      timeout: 2s
+      retries: 5
+      start_period: 15s
+    labels:
+      tsdproxy.enable: "true"
+

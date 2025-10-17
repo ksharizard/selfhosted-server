@@ -1,0 +1,9 @@
+include:
+  - path: 'media/docker-compose.yaml'
+  - path: 'photos/docker-compose.yaml'
+  - path: 'misc/docker-compose.yaml'
+  # - path: 'test/docker-compose.yaml'
+  - path: 'music/docker-compose.yaml'
+  # - path: 'reddit/docker-compose.yaml'
+  - path: 'tailscale/docker-compose.yaml'
+

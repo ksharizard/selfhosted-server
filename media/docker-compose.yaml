@@ -1,0 +1,119 @@
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    env_file:
+      - ../.env
+    volumes:
+      - ./config/jellyfin:/config
+      - ${MEDIA_DIRECTORY}/media:/data/media:ro
+    ports:
+      - "8096:8096"
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: "2G"
+    labels:
+      tsdproxy.enable: "true"
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    env_file:
+      - ../.env
+    volumes:
+      - ./config/sonarr:/config
+      - ${MEDIA_DIRECTORY}:/data
+    ports:
+      - "8989:8989"
+    restart: unless-stopped
+    labels:
+      tsdproxy.enable: "true"
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    env_file:
+      - ../.env
+    volumes:
+      - ./config/radarr:/config
+      - ${MEDIA_DIRECTORY}:/data
+    ports:
+      - "7878:7878"
+    restart: unless-stopped
+    labels:
+      tsdproxy.enable: "true"
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    env_file:
+      - ../.env
+    volumes:
+      - ./config/prowlarr:/config
+    ports:
+      - "9696:9696"
+    restart: unless-stopped
+    labels:
+      tsdproxy.enable: "true"
+
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    env_file:
+      - ../.env
+    volumes:
+      - ./config/bazarr:/config
+      - ${MEDIA_DIRECTORY}:/data
+    ports:
+      - "6767:6767"
+    restart: unless-stopped
+    labels:
+      tsdproxy.enable: "true"
+    profiles:
+      - donotstart
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    env_file:
+      - ../.env
+    volumes:
+      - ./config/qbittorrent:/config
+      - ${MEDIA_DIRECTORY}/torrents:/data/torrents
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    labels:
+      tsdproxy.enable: "true"
+
+  yamtrack:
+    image: ghcr.io/fuzzygrim/yamtrack
+    container_name: yamtrack
+    depends_on:
+      - redis
+    env_file:
+      - ../.env
+      - .env
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - URLS=${YAMTRACK_URL}
+      - SECRET=${YAMTRACK_SECRET}
+    volumes:
+      - ./config/yamtrack/db:/yamtrack/db
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    labels:
+      tsdproxy.enable: "true"
+
+  redis:
+    container_name: yamtrack-redis
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:

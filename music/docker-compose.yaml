@@ -1,0 +1,61 @@
+services:
+  lidarr:
+    image: ghcr.io/hotio/lidarr:pr-plugins
+    container_name: lidarr
+    env_file:
+      - ../.env
+    environment:
+      - UMASK=002
+    volumes:
+      - ./config/lidarr:/config
+      - ${MEDIA_DIRECTORY}:/data
+    ports:
+      - "8686:8686"
+    restart: unless-stopped
+    labels:
+      tsdproxy.enable: "true"
+
+  slskd:
+    image: slskd/slskd:latest
+    container_name: slskd
+    user: 1000:1000
+    ports:
+      - "5030:5030"
+      - "5031:5031/udp"
+      - "50300:50300/tcp"
+    volumes:
+      - ./config/slskd:/app
+      - ${MEDIA_DIRECTORY}/media/music:/media/music
+      - ${MEDIA_DIRECTORY}/torrents/slskd:/data/torrents/slskd
+    restart: unless-stopped
+    labels:
+      tsdproxy.enable: "true"
+      tsdproxy.container_port: 5030
+
+  beets:
+   image: lscr.io/linuxserver/beets:latest  
+   container_name: beets
+   env_file:
+     - ../.env
+   volumes:
+     - ./config/beets:/config
+     - ${MEDIA_DIRECTORY}/media/music:/music
+     - ${MEDIA_DIRECTORY}/torrents/slskd/complete:/downloads
+   ports:
+     - 8337:8337
+   restart: unless-stopped
+
+  multi-scrobbler:
+    image: foxxmd/multi-scrobbler
+    container_name: ms
+    env_file:
+        - .env
+        - ../.env
+    volumes:
+        - "./config/multi-scrobbler:/config"
+    ports:
+        - "9078:9078"
+    restart: unless-stopped
+    labels:
+      tsdproxy.enable: "true"
+
