@@ -1,6 +1,6 @@
 services:
   archisteamfarm:
-    image: justarchi/archisteamfarm:latest
+    image: justarchi/archisteamfarm:released
     container_name: asf
     ports:
       - "1242:1242"
@@ -9,8 +9,6 @@ services:
       - ./config/ASF/plugins:/app/plugins
     restart: unless-stopped
     user: 1000:1000
-    labels:
-      tsdproxy.enable: "true"
 
   freshrss:
     image: lscr.io/linuxserver/freshrss:latest
@@ -24,9 +22,6 @@ services:
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
-    labels:
-      tsdproxy.enable: "true"
-      tsdproxy.container_port: "80"
 
   radicale:
     container_name: radicale
@@ -52,8 +47,6 @@ services:
     volumes:
       - ./config/radicale/config:/config:ro
       - ./config/radicale/data:/data
-    labels:
-      tsdproxy.enable: "true"
 
   syncthing:
     container_name: syncthing
@@ -69,9 +62,6 @@ services:
       - 22000:22000/udp
       - 21027:21027/udp
     restart: unless-stopped
-    labels:
-      tsdproxy.enable: "true"
-      tsdproxy.container_port: 8384
 
   copyparty:
     image: copyparty/ac:latest
@@ -82,21 +72,16 @@ services:
     volumes:
       - ./config/copyparty:/cfg:z
       - ${DRIVE_DIRECTORY}/files:/w:z
+      - ${MEDIA_DIRECTORY}:/x:z
     environment:
       LD_PRELOAD: /usr/lib/libmimalloc-secure.so.NOPE
-      # enable mimalloc by replacing "NOPE" with "2" for a nice speed-boost (will use twice as much ram)
-
       PYTHONUNBUFFERED: 1
-      # ensures log-messages are not delayed (but can reduce speed a tiny bit)
-
     stop_grace_period: 15s  # thumbnailer is allowed to continue finishing up for 10s after the shutdown signal
     healthcheck:
-      # hide it from logs with "/._" so it matches the default --lf-url filter
       test: ["CMD-SHELL", "wget --spider -q 127.0.0.1:3923/?reset=/._"]
       interval: 1m
       timeout: 2s
       retries: 5
       start_period: 15s
-    labels:
-      tsdproxy.enable: "true"
+    restart: unless-stopped
 
