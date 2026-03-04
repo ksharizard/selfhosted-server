@@ -1,0 +1,17 @@
+services:
+  freshrss:
+    image: lscr.io/linuxserver/freshrss:latest
+    container_name: freshrss
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+    volumes:
+      - ./config/freshrss:/config
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    labels:
+      caddy: freshrss.${MY_DOMAIN}
+      caddy.reverse_proxy: "{{upstreams 80}}"
+      # caddy.import: tinyauth_forwarder *
+

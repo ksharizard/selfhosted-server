@@ -1,0 +1,12 @@
+services:
+  archisteamfarm:
+    image: justarchi/archisteamfarm:released
+    container_name: asf
+    volumes:
+      - ./config/ASF/config:/app/config
+      - ./config/ASF/plugins:/app/plugins
+    restart: unless-stopped
+    user: 1000:1000
+    labels:
+      caddy: asf.${MY_DOMAIN}
+      caddy.reverse_proxy: "{{upstreams 1242}}"

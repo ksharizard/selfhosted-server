@@ -1,0 +1,16 @@
+services:
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TZ}
+    volumes:
+      - ./config/qbittorrent:/config
+      - ${MEDIA_DIRECTORY}/torrents:/data/torrents
+    restart: unless-stopped
+    labels:
+      caddy: qbittorrent.${MY_DOMAIN}
+      caddy.reverse_proxy: "{{upstreams 8080}}"
+

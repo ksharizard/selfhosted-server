@@ -1,0 +1,20 @@
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ./config/jellyfin:/config
+      - ${MEDIA_DIRECTORY}/media:/data/media
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: "2G"
+    labels:
+      caddy: jellyfin.${MY_DOMAIN}
+      caddy.reverse_proxy: "{{upstreams 8096}}"
+      # caddy.import: tinyauth_forwarder *

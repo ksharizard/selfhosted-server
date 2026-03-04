@@ -1,0 +1,16 @@
+services:
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:nightly
+    container_name: lidarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ./config/lidarr:/config
+      - ${MEDIA_DIRECTORY}:/data
+    restart: unless-stopped
+    labels:
+      caddy: lidarr.${MY_DOMAIN}
+      caddy.reverse_proxy: "{{upstreams 8686}}"
+      caddy.import: tinyauth_forwarder *

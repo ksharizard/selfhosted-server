@@ -1,0 +1,56 @@
+services:
+  yamtrack_mod:
+    image: ghcr.io/dannyvfilms/yamtrack:latest
+    container_name: yamtrack_mod
+    depends_on:
+      - yamtrack_mod-redis
+    env_file:
+      - .env
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TZ}
+      - REDIS_URL=redis://yamtrack_mod-redis:6379
+      - DEBUG=False
+    volumes:
+      - ./config/yamtrack_mod/db:/yamtrack/db
+    restart: unless-stopped
+    labels:
+      caddy: yamtrack-mod.${MY_DOMAIN}
+      caddy.reverse_proxy: "{{upstreams 8000}}"
+
+  yamtrack_mod-redis:
+    container_name: yamtrack_mod-redis
+    image: redis:8-alpine
+    restart: unless-stopped
+    volumes:
+      - redis_mod_data:/data
+
+  yamtrack:
+    container_name: yamtrack
+    image: ghcr.io/fuzzygrim/yamtrack
+    restart: unless-stopped
+    depends_on:
+      - yamtrack-redis
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TZ}
+      - SECRET=a!qnwv%1n=y9n2kl20+i4s7f%w1angoupxj6ld1cc#g)*ws7(c
+      - REDIS_URL=redis://yamtrack-redis:6379
+    volumes:
+      - ./config/yamtrack/db:/yamtrack/db
+    labels:
+      caddy: yamtrack.${MY_DOMAIN}
+      caddy.reverse_proxy: "{{upstreams 8000}}"
+
+  yamtrack-redis:
+    container_name: yamtrack-redis
+    image: redis:8-alpine
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:
+  redis_mod_data:

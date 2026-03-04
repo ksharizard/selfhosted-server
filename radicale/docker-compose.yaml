@@ -1,0 +1,27 @@
+services:
+  radicale:
+    container_name: radicale
+    image: tomsquest/docker-radicale
+    init: true
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETUID
+      - SETGID
+      - CHOWN
+      - KILL
+    healthcheck:
+      test: curl -f http://127.0.0.1:5232 || exit 1
+      interval: 30s
+      retries: 3
+    restart: unless-stopped
+    volumes:
+      - ./config/radicale/config:/config:ro
+      - ./config/radicale/data:/data
+    labels:
+      caddy: radicale.${MY_DOMAIN}
+      caddy.reverse_proxy: "{{upstreams 5232}}"
+

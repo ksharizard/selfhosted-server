@@ -1,0 +1,13 @@
+services:
+  tinyauth:
+    container_name: tinyauth
+    image: ghcr.io/steveiliop56/tinyauth:v4
+    restart: unless-stopped
+    environment:
+      - APP_URL=https://tinyauth.${MY_DOMAIN}
+      - PROVIDERS_GITHUB_CLIENT_ID=${TINYAUTH_GITHUB_CLIENT_ID}
+      - PROVIDERS_GITHUB_CLIENT_SECRET=${TINYAUTH_GITHUB_CLIENT_SECRET}
+    labels:
+      caddy: tinyauth.${MY_DOMAIN}
+      caddy.reverse_proxy: "{{upstreams 3000}}"
+
