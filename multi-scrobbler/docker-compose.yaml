@@ -3,10 +3,12 @@ services:
     image: foxxmd/multi-scrobbler
     container_name: ms
     env_file:
-        - .env
-        - ../.env
+      - .env
+      - ../.env
+    environment:
+      - BASE_URL=https://ms.${MY_DOMAIN}
     volumes:
-        - "./config/multi-scrobbler:/config"
+      - "./config/multi-scrobbler:/config"
     restart: unless-stopped
     labels:
       caddy: ms.${MY_DOMAIN}
