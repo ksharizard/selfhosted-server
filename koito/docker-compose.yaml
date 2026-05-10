@@ -1,0 +1,26 @@
+services:
+  koito:
+    image: gabehf/koito:latest
+    container_name: koito
+    depends_on:
+      - db
+    environment:
+      - KOITO_DATABASE_URL=postgres://postgres:cY5_UwaNMI3UI1JUdt2n@db:5432/koitodb
+      - KOITO_ALLOWED_HOSTS=*
+    volumes:
+      - ./koito-data:/etc/koito
+    restart: unless-stopped
+    labels:
+      tsbridge.enabled: true
+      tsbridge.service.port: 4110
+
+  db:
+    image: postgres:16
+    container_name: psql
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: koitodb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: cY5_UwaNMI3UI1JUdt2n
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
