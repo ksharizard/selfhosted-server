@@ -5,10 +5,10 @@ services:
     volumes:
       - ./config:/config
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=${TZ}
     restart: unless-stopped
     labels:
-      caddy: profilarr.${MY_DOMAIN}
-      caddy.reverse_proxy: "{{upstreams 6868}}"
+      tsbridge.enabled: true
+      tsbridge.service.port: 6868

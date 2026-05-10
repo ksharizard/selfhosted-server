@@ -11,6 +11,5 @@ services:
       - ${MEDIA_DIRECTORY}:/data
     restart: unless-stopped
     labels:
-      caddy: radarr.${MY_DOMAIN}
-      caddy.reverse_proxy: "{{upstreams 7878}}"
-      caddy.import: tinyauth_forwarder *
+      tsbridge.enabled: true
+      tsbridge.service.port: 7878

@@ -10,6 +10,5 @@ services:
       - ./config/prowlarr:/config
     restart: unless-stopped
     labels:
-      caddy: prowlarr.${MY_DOMAIN}
-      caddy.reverse_proxy: "{{upstreams 9696}}"
-
+      tsbridge.enabled: true
+      tsbridge.service.port: 9696

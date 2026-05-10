@@ -11,7 +11,6 @@ services:
     security_opt:
       - no-new-privileges:true
     labels:
-      caddy: freshrss.${MY_DOMAIN}
-      caddy.reverse_proxy: "{{upstreams 80}}"
-      # caddy.import: tinyauth_forwarder *
+      - "tsbridge.enabled=true"
+      - "tsbridge.service.port=80"
 

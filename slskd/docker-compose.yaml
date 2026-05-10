@@ -12,7 +12,6 @@ services:
       - ${MEDIA_DIRECTORY}/torrents/slskd:/data/torrents/slskd
     restart: unless-stopped
     labels:
-      caddy: slskd.${MY_DOMAIN}
-      caddy.reverse_proxy: "{{upstreams 5030}}"
-      caddy.import: tinyauth_forwarder *
+      - "tsbridge.enabled=true"
+      - "tsbridge.service.port=5030"
 

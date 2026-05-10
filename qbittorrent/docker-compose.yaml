@@ -11,6 +11,5 @@ services:
       - ${MEDIA_DIRECTORY}/torrents:/data/torrents
     restart: unless-stopped
     labels:
-      caddy: qbittorrent.${MY_DOMAIN}
-      caddy.reverse_proxy: "{{upstreams 8080}}"
-
+      tsbridge.enabled: true
+      tsbridge.service.port: 8080

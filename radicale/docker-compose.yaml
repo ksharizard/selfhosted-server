@@ -22,6 +22,5 @@ services:
       - ./config/radicale/config:/config:ro
       - ./config/radicale/data:/data
     labels:
-      caddy: radicale.${MY_DOMAIN}
-      caddy.reverse_proxy: "{{upstreams 5232}}"
-
+      tsbridge.enabled: true
+      tsbridge.service.port: 5232
