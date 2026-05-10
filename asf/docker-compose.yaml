@@ -1,12 +1,12 @@
 services:
   archisteamfarm:
-    image: justarchi/archisteamfarm:released
     container_name: asf
+    image: justarchi/archisteamfarm:stable
+    user: 1000:1000
     volumes:
       - ./config/ASF/config:/app/config
       - ./config/ASF/plugins:/app/plugins
     restart: unless-stopped
-    user: 1000:1000
     labels:
-      caddy: asf.${MY_DOMAIN}
-      caddy.reverse_proxy: "{{upstreams 1242}}"
+      tsbridge.enabled: true
+      tsbridge.service.port: 1242
