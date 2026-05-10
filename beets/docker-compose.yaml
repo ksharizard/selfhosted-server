@@ -1,17 +1,13 @@
 services:
-  beets-flask:
+  beets:
+    image: lscr.io/linuxserver/beets:latest
     container_name: beets
-    image: pspitzner/beets-flask:stable
-    restart: unless-stopped
     environment:
-      TZ: $TZ
-      USER_ID: $PUID
-      GROUP_ID: $PGID
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=$TZ
     volumes:
-      - ./config/beets-flask:/config
+      - ./config/beets:/config
       - ${MEDIA_DIRECTORY}/media/music:/music
-      - ${MEDIA_DIRECTORY}/torrents/slskd/complete:${MEDIA_DIRECTORY}/torrents/slskd/complete
-    labels:
-      caddy: beets.${MY_DOMAIN}
-      caddy.reverse_proxy: "{{upstreams 5001}}"
-      caddy.import: tinyauth_forwarder *
+      - ${MEDIA_DIRECTORY}/torrents/slskd/complete:/downloads
+    restart: unless-stopped
