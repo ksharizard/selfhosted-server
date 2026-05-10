@@ -4,12 +4,16 @@ services:
     container_name: navidrome
     user: 1000:1000
     environment:
-      - ND_ARTISTARTPRIORITY=artist.*, album/artist.*, folder.*, external
+      ND_ARTISTARTPRIORITY: artist.*, album/artist.*, folder.*, external
+      ND_ALBUMPLAYCOUNTMODE: "normalized"
+      ND_AGENTS: apple-music,deezer
+      ND_LYRICSPRIORITY: ".lrc,lrclib-lyrics,.txt,embedded"
+      # - ND_LISTENBRAINZ_BASEURL=""
     restart: unless-stopped
     volumes:
       - ./config/navidrome:/data
       - ${MEDIA_DIRECTORY}/media/music:/music:ro
     labels:
-      caddy: navidrome.${MY_DOMAIN}
-      caddy.reverse_proxy: "{{upstreams 4533}}"
-      # caddy.import: tinyauth_forwarder *
+      tsbridge.enabled: true
+      tsbridge.service.port: 4533
+
