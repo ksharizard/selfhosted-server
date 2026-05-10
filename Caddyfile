@@ -1,0 +1,91 @@
+{
+  tailscale {
+    ephemeral
+  }
+}
+
+jellyfin.bengal-teeth.ts.net {
+  bind tailscale/jellyfin
+  reverse_proxy 192.168.1.10:8096
+}
+
+sonarr.bengal-teeth.ts.net {
+  bind tailscale/sonarr
+  reverse_proxy 192.168.1.10:8989
+}
+
+radarr.bengal-teeth.ts.net {
+  bind tailscale/radarr
+  reverse_proxy 192.168.1.10:7878
+}
+
+prowlarr.bengal-teeth.ts.net {
+  bind tailscale/prowlarr
+  reverse_proxy 192.168.1.10:9696
+}
+
+asf.bengal-teeth.ts.net {
+  bind tailscale/asf
+  reverse_proxy 192.168.1.10:1242
+}
+
+freshrss.bengal-teeth.ts.net {
+  bind tailscale/freshrss
+  reverse_proxy 192.168.1.10:3000
+}
+
+radicale.bengal-teeth.ts.net {
+  bind tailscale/radicale
+  reverse_proxy 192.168.1.10:5232
+}
+
+syncthing.bengal-teeth.ts.net {
+  bind tailscale/syncthing
+  reverse_proxy 192.168.1.10:8384
+}
+
+copyparty.bengal-teeth.ts.net {
+  bind tailscale/copyparty
+  reverse_proxy 192.168.1.10:3923
+}
+
+lidarr.bengal-teeth.ts.net {
+  bind tailscale/lidarr
+  reverse_proxy 192.168.1.10:8686
+}
+
+slskd.bengal-teeth.ts.net {
+  bind tailscale/slskd
+  reverse_proxy 192.168.1.10:5030
+}
+
+ms.bengal-teeth.ts.net {
+  bind tailscale/ms
+  reverse_proxy 192.168.1.10:9078
+}
+
+immich.bengal-teeth.ts.net {
+  bind tailscale/immich
+  reverse_proxy 192.168.1.10:2283
+}
+
+qbittorrent.bengal-teeth.ts.net {
+  bind tailscale/qbittorrent
+  reverse_proxy 192.168.1.10:8080
+}
+
+navidrome.bengal-teeth.ts.net {
+  bind tailscale/navidrome
+  reverse_proxy 192.168.1.10:4533
+}
+
+yamtrack.bengal-teeth.ts.net {
+  bind tailscale/yamtrack
+  reverse_proxy 192.168.1.10:8000
+}
+
+beets.bengal-teeth.ts.net {
+  bind tailscale/beets
+  reverse_proxy 192.168.1.10:5001
+}
+
