@@ -2,6 +2,8 @@ services:
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
+    ports:
+      - 8096:8096
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -14,7 +16,14 @@ services:
       resources:
         limits:
           memory: "2G"
+    # labels:
+    #   caddy: jellyfin.${MY_DOMAIN}
+    #   caddy.reverse_proxy: "{{upstreams 8096}}"
+    #   # caddy.import: tinyauth_forwarder *
     labels:
-      caddy: jellyfin.${MY_DOMAIN}
-      caddy.reverse_proxy: "{{upstreams 8096}}"
-      # caddy.import: tinyauth_forwarder *
+      - "tsbridge.enabled=true"
+      - "tsbridge.service.port=8096"
+      - "tsbridge.service.write_timeout=0s"
+      - "tsbridge.service.response_header_timeout=0s"
+      - "tsbridge.service.idle_conn_timeout=300s"
+      - "tsbridge.service.flush_interval=-1ms"
