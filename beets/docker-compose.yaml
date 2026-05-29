@@ -2,6 +2,7 @@ services:
   beets:
     image: lscr.io/linuxserver/beets:latest
     container_name: beets
+    user: 1000:1000
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
