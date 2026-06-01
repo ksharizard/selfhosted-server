@@ -1,8 +1,6 @@
 include:
   - path: 'asf/docker-compose.yaml'
   - path: 'beets/docker-compose.yaml'
-  - path: 'copyparty/docker-compose.yaml'
-  - path: 'dockhand/docker-compose.yaml'
   - path: 'jellyfin/docker-compose.yaml'
   - path: 'navidrome/docker-compose.yaml'
   - path: 'photos/docker-compose.yaml'
