@@ -8,11 +8,7 @@
   "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch", "digest"],
-      "automerge": true
-    },
-    {
-      "matchUpdateTypes": ["major"],
+      "matchUpdateTypes": ["major", "minor", "patch", "digest"],
       "automerge": false
     }
   ]
