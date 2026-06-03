@@ -23,7 +23,7 @@
         "lscr.io/linuxserver/qbittorrent",
         "ghcr.io/linuxserver/qbittorrent"
       ],
-      "ignoreVersions": ["/^v?20/"]
+      "allowedVersions": "!/^v?20/"
     }
   ]
 }
