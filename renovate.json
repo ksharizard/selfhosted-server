@@ -15,6 +15,15 @@
       "description": "Disable updates for immich postgres",
       "matchPackageNames": ["ghcr.io/immich-app/postgres"],
       "enabled": false
+    },
+    {
+      "description": "Skip bad image versions for qbittorrent",
+      "matchPackageNames": [
+        "linuxserver/qbittorrent",
+        "lscr.io/linuxserver/qbittorrent",
+        "ghcr.io/linuxserver/qbittorrent"
+      ],
+      "ignoreVersions": ["/^v?20/"]
     }
   ]
 }
