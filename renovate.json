@@ -10,6 +10,11 @@
     {
       "matchUpdateTypes": ["major", "minor", "patch", "digest"],
       "automerge": false
+    },
+    {
+      "description": "Disable updates for immich postgres",
+      "matchPackageNames": ["ghcr.io/immich-app/postgres"],
+      "enabled": false
     }
   ]
 }
