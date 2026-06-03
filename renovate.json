@@ -17,13 +17,11 @@
       "enabled": false
     },
     {
+      // linuxserver pushed a 20.04.1 image tag that they refuse to remove
       "description": "Skip bad image versions for qbittorrent",
-      "matchPackageNames": [
-        "linuxserver/qbittorrent",
-        "lscr.io/linuxserver/qbittorrent",
-        "ghcr.io/linuxserver/qbittorrent"
-      ],
-      "allowedVersions": "!/^v?20/"
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["lscr.io/linuxserver/qbittorrent"],
+      "allowedVersions": "<10.0.0"
     }
   ]
 }
