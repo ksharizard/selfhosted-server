@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "dependencyDashboard": false,
-  "prCreation": "immediate",
+  "prBodyTemplate": "{{{header}}}{{{table}}}{{{warnings}}}{{{notes}}}{{{changelogs}}}",
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
   "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
