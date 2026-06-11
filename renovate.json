@@ -17,6 +17,11 @@
       "enabled": false
     },
     {
+      "description": "Use upstream registry for linuxserver images",
+      "matchPackageNames": ["lscr.io/linuxserver/.*"],
+      "registryUrls": ["docker.io"]
+    },
+    {
       // linuxserver pushed a 20.04.1 image tag that they refuse to remove
       "description": "Skip bad image versions for qbittorrent",
       "matchDatasources": ["docker"],
