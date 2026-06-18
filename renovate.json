@@ -24,21 +24,16 @@
       "allowedVersions": "<10.0.0"
     },
     {
-
       "matchDatasources": ["docker"],
       "matchPackageNames": ["lscr.io/linuxserver/qbittorrent"],
       "changelogUrl": "https://github.com/qbittorrent/qBittorrent/releases/tag/release-{{newVersion}}"
     },
+
+    /* Linuxserver.io images prefixed with 'version' */
     {
-      "matchPackageNames": [
-        "lscr.io/linuxserver/radarr",
-        "lscr.io/linuxserver/sonarr",
-        "lscr.io/linuxserver/lidarr",
-        "lscr.io/linuxserver/prowlarr"
-      ],
-      "extractVersion": "^v?(?<version>\\d+\\.\\d+\\.\\d+)",
-      "changelogUrl": "https://github.com/{{{replace 'lscr.io/linuxserver/' '' packageName}}}/{{{replace 'lscr.io/linuxserver/' '' packageName}}}",
-      "versioning": "semver"
+      "matchDatasources": ["docker"],
+      "matchPackagePatterns": ["^lscr\\.io\\/linuxserver\\/"],
+      "versioning": "regex:^version-v?(?<major>\\d+)\\.(?<minor>\\d+)(\\.(?<patch>\\d+))?(\\.(?<build>.*))?$"
     }
   ]
 }
