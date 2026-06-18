@@ -28,6 +28,17 @@
       "matchDatasources": ["docker"],
       "matchPackageNames": ["lscr.io/linuxserver/qbittorrent"],
       "changelogUrl": "https://github.com/qbittorrent/qBittorrent/releases/tag/release-{{newVersion}}"
+    },
+    {
+      "matchPackageNames": [
+        "lscr.io/linuxserver/radarr",
+        "lscr.io/linuxserver/sonarr",
+        "lscr.io/linuxserver/lidarr",
+        "lscr.io/linuxserver/prowlarr"
+      ],
+      "extractVersion": "^v?(?<version>\\d+\\.\\d+\\.\\d+)",
+      "changelogUrl": "https://github.com/{{{replace 'lscr.io/linuxserver/' '' packageName}}}/{{{replace 'lscr.io/linuxserver/' '' packageName}}}",
+      "versioning": "semver"
     }
   ]
 }
