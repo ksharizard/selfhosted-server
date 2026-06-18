@@ -27,7 +27,7 @@
 
       "matchDatasources": ["docker"],
       "matchPackageNames": ["lscr.io/linuxserver/qbittorrent"],
-      "changelogUrl": "https://github.com/qbittorrent/qBittorrent/releases/tag/v{{newVersion}}"
+      "changelogUrl": "https://github.com/qbittorrent/qBittorrent/releases/tag/release-{{newVersion}}"
     }
   ]
 }
