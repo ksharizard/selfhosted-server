@@ -34,6 +34,13 @@
       "matchDepNames": ["lscr.io/linuxserver/prowlarr"],
       "sourceUrl": "https://github.com/Prowlarr/Prowlarr",
       "changelogUrl": "https://github.com/Prowlarr/Prowlarr"
+    },
+    {
+      "description": "Set source url for beets",
+      "matchDatasources": ["docker"],
+      "matchDepNames": ["lscr.io/linuxserver/beets"],
+      "sourceUrl": "https://github.com/beetbox/beets",
+      "changelogUrl": "https://github.com/beetbox/beets"
     }
   ]
 }
