@@ -1,0 +1,17 @@
+services:
+  beets-flask:
+    container_name: beets-flask
+    image: pspitzner/beets-flask:v2.0.0-rc5
+    restart: unless-stopped
+    environment:
+      TZ: $TZ
+      USER_ID: $PUID
+      GROUP_ID: $PGID
+    volumes:
+      - ./config/beets-flask:/config
+      - ${MEDIA_DIRECTORY}/media/music:/music
+      - ${MEDIA_DIRECTORY}/torrents/slskd/complete:${MEDIA_DIRECTORY}/torrents/slskd/complete
+    labels:
+      - "tsbridge.enabled=true"
+      - "tsbridge.service.name=beets"
+      - "tsbridge.service.port=5001"
