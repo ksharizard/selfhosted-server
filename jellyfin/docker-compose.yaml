@@ -12,14 +12,6 @@ services:
       - ./config/jellyfin:/config
       - ${MEDIA_DIRECTORY}/media:/data/media
     restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          memory: "2G"
-    # labels:
-    #   caddy: jellyfin.${MY_DOMAIN}
-    #   caddy.reverse_proxy: "{{upstreams 8096}}"
-    #   # caddy.import: tinyauth_forwarder *
     labels:
       - "tsbridge.enabled=true"
       - "tsbridge.service.port=8096"
