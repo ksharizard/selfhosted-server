@@ -24,23 +24,46 @@
       "allowedVersions": "<10.0.0"
     },
     {
+      "description": "Fetch upstream changelogs for beets",
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["lscr.io/linuxserver/qbittorrent"],
-      "changelogUrl": "https://github.com/qbittorrent/qBittorrent/releases/tag/release-{{newVersion}}"
+      "matchDepNames": ["lscr.io/linuxserver/beets"],
+      "sourceUrl": "https://github.com/beetbox/beets",
+      "changelogUrl": "https://github.com/beetbox/beets"
     },
     {
-      "description": "Set source url for prowlarr",
+      "description": "Fetch upstream changelogs for jellyfin",
+      "matchDatasources": ["docker"],
+      "matchDepNames": ["lscr.io/linuxserver/jellyfin"],
+      "sourceUrl": "https://github.com/jellyfin/jellyfin",
+      "changelogUrl": "https://github.com/jellyfin/jellyfin"
+    },
+    {
+      "description": "Fetch upstream changelogs for prowlarr",
       "matchDatasources": ["docker"],
       "matchDepNames": ["lscr.io/linuxserver/prowlarr"],
       "sourceUrl": "https://github.com/Prowlarr/Prowlarr",
       "changelogUrl": "https://github.com/Prowlarr/Prowlarr"
     },
     {
-      "description": "Set source url for beets",
+      "description": "Fetch upstream changelogs for qbittorrent",
       "matchDatasources": ["docker"],
-      "matchDepNames": ["lscr.io/linuxserver/beets"],
-      "sourceUrl": "https://github.com/beetbox/beets",
-      "changelogUrl": "https://github.com/beetbox/beets"
+      "matchPackageNames": ["lscr.io/linuxserver/qbittorrent"],
+      "sourceUrl": "https://github.com/qbittorrent/qBittorrent",
+      "changelogUrl": "https://github.com/qbittorrent/qBittorrent"
+    },
+    {
+      "description": "Fetch upstream changelogs for radarr",
+      "matchDatasources": ["docker"],
+      "matchDepNames": ["lscr.io/linuxserver/radarr"],
+      "sourceUrl": "https://github.com/Radarr/Radarr",
+      "changelogUrl": "https://github.com/Radarr/Radarr"
+    },
+    {
+      "description": "Fetch upstream changelogs for sonarr",
+      "matchDatasources": ["docker"],
+      "matchDepNames": ["lscr.io/linuxserver/sonarr"],
+      "sourceUrl": "https://github.com/Sonarr/Sonarr",
+      "changelogUrl": "https://github.com/Sonarr/Sonarr"
     }
   ]
 }
