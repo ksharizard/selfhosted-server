@@ -1,14 +1,33 @@
 # Selfhosted Server Stack
-
-My selfhosted docker stack which I use on an old laptop for random services.
+My selfhosted docker stack which I use on my laptop for random services.
 
 ## Services
-- ArchiSteamFarm: used to farm Steam cards and also acts as a CLI interface for Steam functions
-- Dockhand: manages docker containers and stacks
-- Navidrome: local music server
+- ArchiSteamFarm: farms Steam cards and provides a CLI for Steam functions
+- beets-flask: web UI for beets music library management & tagging
+- Jellyfin: media streaming server for movies, TV, and music
+- Immich: self-hosted photo and video backup & management
+- Navidrome: self-hosted music streaming server
+- Profilarr: custom format and profile management for Radarr/Sonarr
+- Prowlarr: indexer management and search aggregator for the *arr stack
+- qBittorrent: torrent client with web UI
+- Radarr: movie collection automation and management
+- Seerr: media request management for Jellyfin
+- slskd: Soulseek music file sharing client
+- Sonarr: TV series collection automation and management
+- tsbridge: Tailscale mesh VPN integration for Docker containers
 
 ## Installation
-1) Copy .env.example and make a .env, filling the required variables
-2) Install docker and docker compose plugin
-3) Pull this repository into a directory
-4) `docker compose up -d`
+### Prerequisites
+- [Docker](https://docs.docker.com/engine/install/) and the [Docker Compose plugin](https://docs.docker.com/compose/install/)
+
+### Setup
+1. Copy `.env.example` to `.env` and populate the required variables:
+2. Clone this repository and enter the directory:
+   ```bash
+   git clone https://github.com/ksharizard/selfhosted-server && cd selfhosted-server
+   ```
+
+3. Start all services:
+   ```bash
+   sudo docker compose up -d
+   ```
