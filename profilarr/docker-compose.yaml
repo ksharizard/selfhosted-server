@@ -1,6 +1,6 @@
 services:
   profilarr:
-    image: santiagosayshey/profilarr:v1.1.5
+    image: ghcr.io/dictionarry-hub/profilarr:2.0.9
     container_name: profilarr
     volumes:
       - ./config:/config
@@ -8,6 +8,7 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
+      - ORIGIN=https://profilarr.bengal-teeth.ts.net
     restart: unless-stopped
     labels:
       tsbridge.enabled: true
