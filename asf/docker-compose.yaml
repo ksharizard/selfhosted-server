@@ -1,7 +1,7 @@
 services:
   archisteamfarm:
     container_name: asf
-    image: ghcr.io/justarchi/archisteamfarm:6.3.6.1
+    image: ghcr.io/justarchinet/archisteamfarm:6.3.6.1
     user: 1000:1000
     volumes:
       - ./config/ASF/config:/app/config
