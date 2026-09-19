@@ -2,19 +2,22 @@
 My selfhosted docker stack which I use on my laptop for random services.
 
 ## Services
-- ArchiSteamFarm: farms Steam cards and provides a CLI for Steam functions
-- beets-flask: web UI for beets music library management & tagging
-- Jellyfin: media streaming server for movies, TV, and music
-- Immich: self-hosted photo and video backup & management
-- Navidrome: self-hosted music streaming server
-- Profilarr: custom format and profile management for Radarr/Sonarr
-- Prowlarr: indexer management and search aggregator for the *arr stack
-- qBittorrent: torrent client with web UI
-- Radarr: movie collection automation and management
-- Seerr: media request management for Jellyfin
-- slskd: Soulseek music file sharing client
-- Sonarr: TV series collection automation and management
-- tsbridge: Tailscale mesh VPN integration for Docker containers
+| Service | Description |
+|---|---|
+| ArchiSteamFarm | Farms Steam cards and provides a CLI for Steam functions |
+| beets-flask | Web UI for beets music library management & tagging |
+| jellyfin | Media streaming server for movies, TV, and music |
+| Immich | Self-hosted photo and video backup & management |
+| Navidrome | Self-hosted music streaming server |
+| Profilarr | Custom format and profile management for Radarr/Sonarr |
+| Prowlarr | Indexer management and search aggregator for the *arr stack |
+| qBittorrent | Torrent client with web UI |
+| Radarr | Movie collection automation and management |
+| Seerr | Media request management for Jellyfin |
+| slskd | Soulseek music file sharing client |
+| Sonarr | TV series collection automation and management |
+| tsbridge | Tailscale mesh VPN integration for Docker containers |
+
 
 ## Installation
 ### Prerequisites
